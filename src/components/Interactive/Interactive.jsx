@@ -1,108 +1,116 @@
 import React, { useState } from 'react';
-import Container from '../common/Container/Container';
-import SectionHeader from '../common/SectionHeader/SectionHeader';
-import Button from '../common/Button/Button';
 import styles from './Interactive.module.css';
 
+const categories = [
+  {
+    id: 'colors',
+    label: 'Colors',
+    icon: '🎨',
+    items: [
+      { name: 'Red', emoji: '🔴', fact: 'Red is the color of apples, roses, and fire trucks!' },
+      { name: 'Blue', emoji: '🔵', fact: 'Blue is the color of the sky and the deep ocean!' },
+      { name: 'Yellow', emoji: '🟡', fact: 'Yellow is the color of the sun and sunflowers!' },
+      { name: 'Green', emoji: '🟢', fact: 'Green is the color of leaves, grass, and frogs!' },
+    ],
+  },
+  {
+    id: 'numbers',
+    label: 'Numbers',
+    icon: '🔢',
+    items: [
+      { name: '1', emoji: '1️⃣', fact: 'One — like one sun in the sky!' },
+      { name: '2', emoji: '2️⃣', fact: 'Two — like two eyes on your face!' },
+      { name: '3', emoji: '3️⃣', fact: 'Three — like three little pigs!' },
+      { name: '5', emoji: '5️⃣', fact: 'Five — like five fingers on one hand!' },
+    ],
+  },
+  {
+    id: 'shapes',
+    label: 'Shapes',
+    icon: '🔷',
+    items: [
+      { name: 'Circle', emoji: '⭕', fact: 'A circle has no corners — like a wheel or the moon!' },
+      { name: 'Square', emoji: '⬜', fact: 'A square has 4 equal sides — like a window!' },
+      { name: 'Triangle', emoji: '🔺', fact: 'A triangle has 3 sides — like a slice of pizza!' },
+      { name: 'Star', emoji: '⭐', fact: 'Stars twinkle in the night sky — and have 5 points!' },
+    ],
+  },
+];
+
 const Interactive = () => {
-  const [message, setMessage] = useState({
-    title: 'Click on our friend to learn something new!',
-    content: ''
-  });
+  const [activeCategory, setActiveCategory] = useState(0);
+  const [activeItem, setActiveItem] = useState(null);
 
-  const learningContent = {
-    colors: [
-      { name: "Red", icon: "🔴", example: "Like an apple!" },
-      { name: "Blue", icon: "🔵", example: "Like the sky!" },
-      { name: "Yellow", icon: "🟡", example: "Like the sun!" },
-      { name: "Green", icon: "🟢", example: "Like grass!" }
-    ],
-    numbers: [
-      { number: "1", icon: "1️⃣", example: "One little finger" },
-      { number: "2", icon: "2️⃣", example: "Two bright eyes" },
-      { number: "3", icon: "3️⃣", example: "Three little kittens" },
-      { number: "4", icon: "4️⃣", example: "Four seasons" }
-    ],
-    shapes: [
-      { name: "Circle", icon: "⭕", example: "Like a ball!" },
-      { name: "Square", icon: "⬜", example: "Like a window!" },
-      { name: "Triangle", icon: "🔺", example: "Like a slice of pizza!" },
-      { name: "Star", icon: "⭐", example: "Like in the sky!" }
-    ]
-  };
-
-  const showLearningContent = (category) => {
-    const content = learningContent[category];
-    const randomItem = content[Math.floor(Math.random() * content.length)];
-    
-    let title = '';
-    let text = '';
-    
-    switch(category) {
-      case 'colors':
-        title = 'Let\'s Learn Colors!';
-        text = `${randomItem.icon} ${randomItem.name} - ${randomItem.example}`;
-        break;
-      case 'numbers':
-        title = 'Let\'s Count!';
-        text = `${randomItem.icon} Number ${randomItem.number} - ${randomItem.example}`;
-        break;
-      case 'shapes':
-        title = 'Let\'s Learn Shapes!';
-        text = `${randomItem.icon} ${randomItem.name} - ${randomItem.example}`;
-        break;
-      default:
-        break;
-    }
-    
-    setMessage({ title, content: text });
-  };
-
-  const showRandomLearning = () => {
-    const categories = ['colors', 'numbers', 'shapes'];
-    const randomCategory = categories[Math.floor(Math.random() * categories.length)];
-    showLearningContent(randomCategory);
-  };
+  const cat = categories[activeCategory];
 
   return (
-    <section className={styles.interactive}>
-      <Container>
-        <SectionHeader 
-          title="Interactive Learning"
-          subtitle="Tap on our friendly character to see what we're learning today!"
-        />
+    <section className={styles.section}>
+      <div className={styles.container}>
+        {/* Left — info */}
+        <div className={styles.left}>
+          <p className={styles.eyebrow}>Interactive Corner</p>
+          <h2 className={styles.heading}>
+            Learning Through<br />
+            <span>Play & Discovery</span>
+          </h2>
+          <p className={styles.body}>
+            Our interactive learning corner lets children explore colors, numbers, and shapes in a fun, engaging way. Tap any card to discover a fun fact!
+          </p>
 
-        <div className={styles.interactiveContainer}>
-          <div className={styles.kidCharacter} onClick={showRandomLearning}>
-            <i className="fas fa-child"></i>
+          {/* Category tabs */}
+          <div className={styles.tabs}>
+            {categories.map((c, i) => (
+              <button
+                key={c.id}
+                className={`${styles.tab} ${activeCategory === i ? styles.tabActive : ''}`}
+                onClick={() => { setActiveCategory(i); setActiveItem(null); }}
+              >
+                <span>{c.icon}</span>
+                {c.label}
+              </button>
+            ))}
           </div>
 
-          <div className={styles.interactiveMessage}>
-            <h3>{message.title}</h3>
-            {message.content && (
+          {/* Fun fact display */}
+          <div className={styles.factBox}>
+            {activeItem !== null ? (
               <>
-                <p className={styles.messageContent}>{message.content}</p>
-                <p>Click again to learn more!</p>
+                <div className={styles.factEmoji}>{cat.items[activeItem].emoji}</div>
+                <div>
+                  <strong>{cat.items[activeItem].name}</strong>
+                  <p>{cat.items[activeItem].fact}</p>
+                </div>
               </>
+            ) : (
+              <p className={styles.factPrompt}>👆 Tap a card to learn something fun!</p>
             )}
           </div>
+        </div>
 
-          <div className={styles.interactiveButtons}>
-            <Button variant="primary" onClick={() => showLearningContent('colors')}>
-              <i className="fas fa-palette"></i>
-              <span>Learn Colors</span>
-            </Button>
-            <Button variant="secondary" onClick={() => showLearningContent('numbers')}>
-              <i className="fas fa-sort-numeric-up"></i>
-              <span>Learn Numbers</span>
-            </Button>
-            <Button variant="primary" onClick={() => showLearningContent('shapes')}>
-              <i className="fas fa-shapes"></i>
-              <span>Learn Shapes</span>
-            </Button>
+        {/* Right — cards */}
+        <div className={styles.right}>
+          <div className={styles.cards}>
+            {cat.items.map((item, i) => (
+              <button
+                key={i}
+                className={`${styles.card} ${activeItem === i ? styles.cardActive : ''}`}
+                onClick={() => setActiveItem(activeItem === i ? null : i)}
+              >
+                <span className={styles.cardEmoji}>{item.emoji}</span>
+                <span className={styles.cardName}>{item.name}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* Decorative image */}
+          <div className={styles.imgWrap}>
+            <img
+              src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=85&auto=format&fit=crop"
+              alt="Children learning"
+            />
           </div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 };

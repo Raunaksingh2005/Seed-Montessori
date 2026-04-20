@@ -1,0 +1,167 @@
+.curriculum { background: var(--cream); }
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+}
+
+.header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 4rem;
+}
+
+.eyebrow {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--sage);
+    margin-bottom: 0.75rem;
+}
+
+.heading {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.heading span { color: var(--sage); font-style: italic; }
+
+.sub {
+    font-size: 1.05rem;
+    color: var(--gray-500);
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Approaches */
+.approaches {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.approachCard {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-xs);
+    border: 1px solid var(--gray-200);
+    transition: var(--transition);
+    opacity: 0;
+    transform: translateY(24px);
+}
+
+.approachCard.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+}
+
+.approachCard:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+}
+
+.approachEmoji {
+    font-size: 3rem;
+    margin-bottom: 1.2rem;
+    display: block;
+}
+
+.approachTitle {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 0.75rem;
+}
+
+.approachDesc {
+    font-size: 0.9rem;
+    color: var(--gray-500);
+    line-height: 1.75;
+    margin: 0;
+}
+
+/* Core areas */
+.coreHeader {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.coreTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gray-900);
+}
+
+.coreGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.coreCard {
+    border-radius: var(--radius-xl);
+    padding: 2rem 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: var(--transition);
+}
+
+.coreCard.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.coreCard:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+}
+
+.coreIcon {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.coreCardTitle {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+}
+
+.coreList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.coreList li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.coreList i { font-size: 0.7rem; margin-top: 3px; flex-shrink: 0; }
+.coreList span { color: var(--gray-700); }
+
+@media (max-width: 1024px) {
+    .approaches { grid-template-columns: 1fr 1fr; }
+    .coreGrid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+    .approaches { grid-template-columns: 1fr; }
+    .coreGrid { grid-template-columns: 1fr; }
+    .container { padding: 4rem 1.5rem; }
+}

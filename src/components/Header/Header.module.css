@@ -2,131 +2,229 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    background: rgba(254, 250, 230, 0.95);
-    backdrop-filter: blur(10px);
+    right: 0;
     z-index: 1000;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
     transition: var(--transition);
 }
 
 .header.scrolled {
-    background: rgba(254, 250, 230, 0.98);
-    box-shadow: var(--shadow);
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: var(--shadow-sm);
 }
 
-.nav {
-    padding: 1rem 0;
-}
-
-.navContainer {
+.inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 76px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    gap: 3rem;
 }
 
+/* Logo */
 .logo {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--sage);
+    gap: 0.75rem;
+    transition: var(--transition-fast);
 }
 
-.logo i {
-    font-size: 1.5rem;
-}
+.logo:hover { opacity: 0.8; }
 
-.navMenu {
+.logoIcon {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, var(--sage), var(--sage-light));
+    border-radius: 10px;
     display: flex;
     align-items: center;
-    gap: 2rem;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    box-shadow: var(--shadow-xs);
+}
+
+.logoText {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.logoMain {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    letter-spacing: -0.02em;
+}
+
+.logoSub {
+    font-size: 0.7rem;
+    color: var(--gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+}
+
+/* Nav */
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 2.2rem;
+    flex: 1;
+    justify-content: center;
 }
 
 .navLink {
-    text-decoration: none;
-    color: var(--dark-gray);
+    font-size: 0.94rem;
     font-weight: 500;
-    transition: var(--transition);
+    color: var(--gray-700);
     position: relative;
-}
-
-.navLink:hover,
-.navLink.active {
-    color: var(--sage);
+    padding: 0.4rem 0;
+    transition: var(--transition-fast);
 }
 
 .navLink::after {
     content: '';
     position: absolute;
-    bottom: -5px;
-    left: 0;
+    bottom: 0;
+    left: 50%;
     width: 0;
     height: 2px;
     background: var(--sage);
-    transition: var(--transition);
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+.navLink:hover,
+.navLinkActive {
+    color: var(--sage);
 }
 
 .navLink:hover::after,
-.navLink.active::after {
+.navLinkActive::after {
     width: 100%;
 }
 
-.mobileToggle {
+/* CTA */
+.actions {
+    display: flex;
+    align-items: center;
+}
+
+.ctaBtn {
+    background: linear-gradient(135deg, var(--sage), var(--sage-dark));
+    color: white;
+    border: none;
+    padding: 0.7rem 1.6rem;
+    border-radius: var(--radius-full);
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.ctaBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sage);
+}
+
+.ctaBtn i {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.ctaBtn:hover i {
+    transform: translateX(3px);
+}
+
+/* Hamburger */
+.hamburger {
     display: none;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 4px;
+    padding: 8px;
 }
 
-.mobileToggle span {
-    width: 20px;
+.hamburger span {
+    width: 24px;
     height: 2px;
-    background: var(--sage);
+    background: var(--gray-800);
+    border-radius: 2px;
     transition: var(--transition);
 }
 
-.mobileToggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
-}
+.hamburgerOpen span:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
+.hamburgerOpen span:nth-child(2) { opacity: 0; }
+.hamburgerOpen span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
 
-.mobileToggle.active span:nth-child(2) {
+/* Mobile Menu */
+.mobileMenu {
+    position: fixed;
+    top: 76px;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 2rem;
+    transform: translateY(-100%);
     opacity: 0;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
-.mobileToggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
+.mobileMenuOpen {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.mobileLink {
+    padding: 1rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--gray-700);
+    border-radius: var(--radius);
+    transition: var(--transition-fast);
+}
+
+.mobileLink:hover,
+.mobileLinkActive {
+    background: var(--sage-pale);
+    color: var(--sage);
+}
+
+.mobileCta {
+    margin-top: 1rem;
+    background: var(--sage);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {
-    .navMenu {
-        position: fixed;
-        top: 80px;
-        left: -100%;
-        width: 100%;
-        background: var(--white);
-        flex-direction: column;
-        padding: 2rem;
-        box-shadow: var(--shadow);
-        transition: var(--transition);
-        gap: 1.5rem;
-    }
-
-    .navMenu.active {
-        left: 0;
-    }
-
-    .mobileToggle {
-        display: flex;
-    }
-
-    .navActions {
-        display: none;
-    }
+    .inner { padding: 0 1.5rem; gap: 1rem; }
+    .nav, .actions { display: none; }
+    .hamburger, .mobileMenu { display: flex; }
+    .logoSub { display: none; }
 }

@@ -1,53 +1,133 @@
 .facilities {
-    background: var(--light-cream);
+    background: var(--cream);
 }
 
-.facilitiesContent {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
 }
 
-.facilityCard {
-    background: var(--white);
-    padding: 2.5rem 2rem;
-    border-radius: var(--border-radius-lg);
+.header {
     text-align: center;
-    box-shadow: var(--shadow);
+    max-width: 600px;
+    margin: 0 auto 4rem;
+}
+
+.eyebrow {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--sage);
+    margin-bottom: 0.75rem;
+}
+
+.heading {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.heading span {
+    color: var(--sage);
+    font-style: italic;
+}
+
+.sub {
+    font-size: 1.05rem;
+    color: var(--gray-500);
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+/* Card */
+.card {
+    background: white;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xs);
     transition: var(--transition);
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(28px);
 }
 
-.facilityCard.visible {
+.card.visible {
     opacity: 1;
     transform: translateY(0);
     transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
 }
 
-.facilityCard:hover {
-    transform: translateY(-5px);
+.card:hover {
     box-shadow: var(--shadow-lg);
+    transform: translateY(-6px);
 }
 
-.facilityIcon {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, var(--sage), var(--light-sage));
-    border-radius: 50%;
+.cardImg {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+}
+
+.cardImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.card:hover .cardImg img {
+    transform: scale(1.07);
+}
+
+.iconBadge {
+    position: absolute;
+    bottom: -18px;
+    left: 1.5rem;
+    width: 44px;
+    height: 44px;
+    background: var(--sage);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1.5rem;
-    color: var(--white);
-    font-size: 1.5rem;
+    color: white;
+    font-size: 1.1rem;
+    box-shadow: var(--shadow-sage);
+    border: 3px solid white;
 }
 
-.facilityCard h3 {
-    margin-bottom: 1rem;
+.cardBody {
+    padding: 2.2rem 1.5rem 1.5rem;
 }
 
-.facilityCard p {
-    color: var(--dark-gray);
-    margin-bottom: 0;
+.cardBody h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 0.6rem;
+}
+
+.cardBody p {
+    font-size: 0.88rem;
+    color: var(--gray-500);
+    line-height: 1.7;
+    margin: 0;
+}
+
+@media (max-width: 1024px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+    .grid { grid-template-columns: 1fr; }
+    .container { padding: 4rem 1.5rem; }
 }

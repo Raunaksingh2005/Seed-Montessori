@@ -46,7 +46,7 @@ const Footer = () => {
           <div className={styles.col}>
             <h4 className={styles.colTitle}>Quick Links</h4>
             <ul className={styles.links}>
-              {['home', 'about', 'facilities', 'gallery', 'contact'].map((id) => (
+              {['home', 'about', 'programs', 'curriculum', 'policies', 'gallery', 'contact'].map((id) => (
                 <li key={id}>
                   <a href={`#${id}`} onClick={(e) => scrollTo(e, id)}>
                     <i className="fas fa-chevron-right"></i>
@@ -63,7 +63,7 @@ const Footer = () => {
             <ul className={styles.contactList}>
               <li>
                 <i className="fas fa-map-marker-alt"></i>
-                <span>Sco 36,37 Aero Arcade G-BLOCK, Aerocity, near International Airport, Punjab 140306</span>
+                <span>AeroArcade, Sco 36-37, G-Block, Aerocity, Mohali, Punjab 140306</span>
               </li>
               <li>
                 <i className="fas fa-phone"></i>
@@ -71,7 +71,7 @@ const Footer = () => {
               </li>
               <li>
                 <i className="fas fa-envelope"></i>
-                <span>info@theseedmontessori.in</span>
+                <span>info.theseedmontessorischool@gmail.com</span>
               </li>
               <li>
                 <i className="fas fa-clock"></i>

@@ -1,0 +1,155 @@
+.section { background: white; overflow: hidden; }
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+}
+
+.header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 4rem;
+}
+
+.eyebrow {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--sage);
+    margin-bottom: 0.75rem;
+}
+
+.heading {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.heading span { color: var(--sage); font-style: italic; }
+
+.sub {
+    font-size: 1.05rem;
+    color: var(--gray-500);
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.timelineLine {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--gray-200);
+    transform: translateX(-50%);
+    z-index: 0;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.step.visible { opacity: 1; transform: translateX(0) !important; }
+
+.left {
+    flex-direction: row;
+    transform: translateX(-30px);
+}
+
+.right {
+    flex-direction: row-reverse;
+    transform: translateX(30px);
+}
+
+.left .stepCard { margin-right: 3rem; }
+.right .stepCard { margin-left: 3rem; }
+
+.stepCard {
+    flex: 1;
+    max-width: calc(50% - 3rem);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    box-shadow: var(--shadow-xs);
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: var(--transition);
+}
+
+.stepCard:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+}
+
+.stepEmoji {
+    font-size: 2rem;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.stepContent { flex: 1; }
+
+.stepTime {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--sage);
+    background: rgba(74, 124, 89, 0.1);
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-full);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.04em;
+}
+
+.stepLabel {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 0.4rem;
+}
+
+.stepDesc {
+    font-size: 0.85rem;
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.stepDot {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background: var(--sage);
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px var(--sage);
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .timelineLine { left: 20px; }
+    .step, .left, .right { flex-direction: column; transform: translateX(0) !important; padding-left: 50px; }
+    .left .stepCard, .right .stepCard { margin: 0; max-width: 100%; }
+    .stepDot { left: 20px; top: 1.5rem; }
+    .container { padding: 4rem 1.5rem; }
+}

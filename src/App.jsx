@@ -3,7 +3,11 @@ import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
+import Programs from './components/Programs/Programs';
+import Curriculum from './components/Curriculum/Curriculum';
+import DailyRoutine from './components/DailyRoutine/DailyRoutine';
 import Facilities from './components/Facilities/Facilities';
+import Policies from './components/Policies/Policies';
 import Gallery from './components/Gallery/Gallery';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
@@ -19,11 +23,8 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-      setTimeout(() => {
-        setEnrollmentModalOpen(true);
-      }, 3000);
+      setTimeout(() => setEnrollmentModalOpen(true), 3000);
     }, 1500);
-
     return () => clearTimeout(timer);
   }, []);
 
@@ -38,7 +39,11 @@ function App() {
       <Header onEnrollClick={() => setEnrollmentModalOpen(true)} />
       <Hero onEnrollClick={() => setEnrollmentModalOpen(true)} />
       <About />
+      <Programs />
+      <Curriculum />
+      <DailyRoutine />
       <Facilities />
+      <Policies />
       <Gallery />
       <Contact />
       <Footer />

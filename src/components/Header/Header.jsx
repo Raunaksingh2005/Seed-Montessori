@@ -4,7 +4,9 @@ import styles from './Header.module.css';
 const navItems = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
-  { id: 'facilities', label: 'Facilities' },
+  { id: 'programs', label: 'Programs' },
+  { id: 'curriculum', label: 'Curriculum' },
+  { id: 'policies', label: 'Policies' },
   { id: 'gallery', label: 'Gallery' },
   { id: 'contact', label: 'Contact' },
 ];

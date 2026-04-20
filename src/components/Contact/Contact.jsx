@@ -42,7 +42,7 @@ const Contact = () => {
     {
       icon: 'fa-map-marker-alt',
       title: 'Visit Us',
-      content: 'Sco 36,37 Aero Arcade G-BLOCK, Aerocity, near International Airport, Punjab 140306'
+      content: 'AeroArcade, Sco 36-37, G-Block, Aerocity, Mohali, Punjab 140306'
     },
     {
       icon: 'fa-phone',
@@ -52,12 +52,12 @@ const Contact = () => {
     {
       icon: 'fa-envelope',
       title: 'Email Us',
-      content: 'info@theseedmontessori.in'
+      content: 'info.theseedmontessorischool@gmail.com'
     },
     {
       icon: 'fa-clock',
       title: 'Operating Hours',
-      content: 'Monday - Friday: 7:00 AM - 6:00 PM'
+      content: 'Monday – Friday: 7:00 AM – 6:00 PM'
     }
   ];
 
@@ -65,8 +65,8 @@ const Contact = () => {
     <section id="contact" className={styles.contact}>
       <Container>
         <SectionHeader 
-          title="Schedule an Appointment"
-          subtitle="Visit us by appointment to discuss your child's educational journey"
+          title="Get in Touch"
+          subtitle="We'd love to meet you and your child. Schedule a visit or send us a message."
         />
 
         <div className={styles.contactContent}>

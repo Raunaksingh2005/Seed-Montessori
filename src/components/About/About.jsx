@@ -1,68 +1,120 @@
-import React from 'react';
-import Container from '../common/Container/Container';
-import SectionHeader from '../common/SectionHeader/SectionHeader';
+import React, { useState } from 'react';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import styles from './About.module.css';
 
-const About = () => {
-  const [ref, isVisible] = useIntersectionObserver();
+const tabs = [
+  {
+    id: 'vision',
+    label: 'Vision',
+    icon: 'fa-eye',
+    heading: 'Our Vision',
+    body: 'To create a nurturing environment where every child builds curiosity, creativity, and confidence — growing into independent, compassionate, and lifelong learners.',
+    points: [
+      { icon: 'fa-lightbulb', text: 'Build curiosity through exploration' },
+      { icon: 'fa-palette', text: 'Foster creativity in every activity' },
+      { icon: 'fa-star', text: 'Develop confidence from within' },
+      { icon: 'fa-seedling', text: 'Nurture a love for lifelong learning' },
+    ],
+  },
+  {
+    id: 'mission',
+    label: 'Mission',
+    icon: 'fa-bullseye',
+    heading: 'Our Mission',
+    body: 'We are committed to encouraging independence and critical thinking, supporting emotional and social growth, fostering creativity through hands-on learning, and building a strong parent-school partnership.',
+    points: [
+      { icon: 'fa-brain', text: 'Encourage independence & critical thinking' },
+      { icon: 'fa-heart', text: 'Support emotional and social growth' },
+      { icon: 'fa-hands', text: 'Foster creativity via hands-on learning' },
+      { icon: 'fa-users', text: 'Build strong parent-school partnerships' },
+    ],
+  },
+  {
+    id: 'philosophy',
+    label: 'Philosophy',
+    icon: 'fa-book-open',
+    heading: 'Our Philosophy',
+    body: 'We blend play-based and Montessori approaches with Reggio Emilia influences — believing that children learn best through hands-on, exploratory experiences that honour the whole child: mind, body, and spirit.',
+    points: [
+      { icon: 'fa-child', text: 'Play-based + Montessori approach' },
+      { icon: 'fa-search', text: 'Hands-on, exploratory learning' },
+      { icon: 'fa-infinity', text: 'Whole-child development' },
+      { icon: 'fa-globe', text: 'Reggio Emilia influences' },
+    ],
+  },
+];
 
-  const features = [
-    {
-      icon: 'fa-child',
-      title: 'Child-Centered Learning',
-      description: 'Our curriculum adapts to each child\'s unique interests and abilities'
-    },
-    {
-      icon: 'fa-hands',
-      title: 'Hands-On Experience',
-      description: 'Learning through practical, engaging activities and materials'
-    },
-    {
-      icon: 'fa-heart',
-      title: 'Nurturing Environment',
-      description: 'Safe, warm, and supportive atmosphere for optimal growth'
-    }
-  ];
+const About = () => {
+  const [activeTab, setActiveTab] = useState('vision');
+  const [ref, visible] = useIntersectionObserver();
+  const current = tabs.find(t => t.id === activeTab);
 
   return (
     <section id="about" className={styles.about}>
-      <Container>
-        <SectionHeader 
-          title="About Seed Montessori"
-          subtitle="Creating a nurturing environment where children thrive"
-        />
+      <div className={styles.container}>
 
-        <div className={styles.aboutContent}>
-          <div className={styles.aboutText}>
-            <h3>Our Philosophy</h3>
-            <p>At Seed Montessori, we believe in nurturing the whole child - intellectually, emotionally, socially, and physically. Our approach is rooted in the Montessori method, which respects each child's individual development pace and learning style.</p>
+        {/* Left — image stack */}
+        <div className={styles.imageStack} ref={ref}>
+          <div className={`${styles.imgLarge} ${visible ? styles.visible : ''}`}>
+            <img
+              src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=700&q=85&auto=format&fit=crop"
+              alt="Teacher guiding a child in Montessori classroom"
+            />
+          </div>
+          <div className={`${styles.imgSmall} ${visible ? styles.visible : ''}`}>
+            <img
+              src="https://images.unsplash.com/photo-1567057419565-4349c49d8a04?w=400&q=85&auto=format&fit=crop"
+              alt="Children working together"
+            />
+          </div>
+          <div className={styles.expBadge}>
+            <span className={styles.expNum}>🌱</span>
+            <span className={styles.expText}>Montessori<br />Certified</span>
+          </div>
+        </div>
 
-            <div className={styles.aboutFeatures}>
-              {features.map((feature, index) => (
-                <div 
-                  key={index}
-                  ref={index === 0 ? ref : null}
-                  className={`${styles.aboutFeature} ${isVisible ? styles.visible : ''}`}
-                  style={{ animationDelay: `${index * 0.2}s` }}
-                >
-                  <i className={`fas ${feature.icon}`}></i>
-                  <div>
-                    <h4>{feature.title}</h4>
-                    <p>{feature.description}</p>
+        {/* Right — tabbed content */}
+        <div className={styles.text}>
+          <p className={styles.eyebrow}>Who We Are</p>
+          <h2 className={styles.heading}>
+            Education Rooted in<br />
+            <span className={styles.headingAccent}>Purpose & Care</span>
+          </h2>
+          <p className={styles.intro}>
+            The Seed Montessori School is built on the belief that every child carries within them the seeds of greatness. Our role is simply to plant knowledge, water it with love, and watch hearts grow.
+          </p>
+
+          {/* Tabs */}
+          <div className={styles.tabs}>
+            {tabs.map(t => (
+              <button
+                key={t.id}
+                className={`${styles.tab} ${activeTab === t.id ? styles.tabActive : ''}`}
+                onClick={() => setActiveTab(t.id)}
+              >
+                <i className={`fas ${t.icon}`}></i>
+                {t.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Tab content */}
+          <div className={styles.tabContent} key={activeTab}>
+            <h3 className={styles.tabHeading}>{current.heading}</h3>
+            <p className={styles.tabBody}>{current.body}</p>
+            <div className={styles.points}>
+              {current.points.map((p, i) => (
+                <div key={i} className={styles.point}>
+                  <div className={styles.pointIcon}>
+                    <i className={`fas ${p.icon}`}></i>
                   </div>
+                  <span>{p.text}</span>
                 </div>
               ))}
             </div>
           </div>
-
-          <div className={styles.aboutVisual}>
-            <div className={styles.visualCard}>
-              <i className="fas fa-seedling"></i>
-            </div>
-          </div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 };
