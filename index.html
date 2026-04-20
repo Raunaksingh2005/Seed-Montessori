@@ -1,0 +1,2716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seed Montessori | Premium Early Childhood Education</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            --cream: #FEFAE6;
+            --sage: #6A8B4A;
+            --brown: #794D2A;
+            --light-sage: #8BA870;
+            --light-brown: #9C6D4A;
+            --dark-sage: #5A7740;
+            --white: #FFFFFF;
+            --light-cream: #FFFDF5;
+            --gray: #6C757D;
+            --light-gray: #F8F9FA;
+            --dark-gray: #495057;
+            
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s ease;
+            --border-radius: 8px;
+            --border-radius-lg: 12px;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-cream);
+            color: var(--brown);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--dark-sage);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 1.75rem);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--dark-gray);
+        }
+
+        .text-accent {
+            color: var(--sage);
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--sage);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-sage);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--sage);
+            border: 2px solid var(--sage);
+        }
+
+        .btn-secondary:hover {
+            background: var(--sage);
+            color: var(--white);
+        }
+
+        .btn-large {
+            padding: 16px 32px;
+            font-size: 1.1rem;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--light-cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-logo {
+            text-align: center;
+        }
+
+        .logo-spinner {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--sage), var(--light-sage));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        .logo-spinner i {
+            font-size: 2rem;
+            color: var(--white);
+        }
+
+        .loader-logo h2 {
+            color: var(--sage);
+            font-size: 1.5rem;
+        }
+
+        /* Success Modal */
+        .success-modal .modal-content {
+            text-align: center;
+            padding: 3rem 2rem;
+            max-width: 500px;
+            background: linear-gradient(135deg, var(--white), var(--light-cream));
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            color: var(--sage);
+            margin-bottom: 2rem;
+            animation: successBounce 0.8s ease;
+            filter: drop-shadow(0 4px 8px rgba(106, 139, 74, 0.3));
+        }
+
+        .success-modal h3 {
+            margin-bottom: 1rem;
+            color: var(--sage);
+            font-size: 1.8rem;
+        }
+
+        .success-modal p {
+            margin-bottom: 2rem;
+            color: var(--dark-gray);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(254, 250, 230, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            background: rgba(254, 250, 230, 0.98);
+            box-shadow: var(--shadow);
+        }
+
+        .nav {
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--sage);
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--sage);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--sage);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .mobile-toggle span {
+            width: 20px;
+            height: 2px;
+            background: var(--sage);
+            transition: var(--transition);
+        }
+
+        .mobile-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .mobile-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--light-cream) 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .floating-item {
+            position: absolute;
+            background: linear-gradient(135deg, var(--sage), transparent);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-item:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .floating-item:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+
+        .floating-item:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            top: 80%;
+            left: 10%;
+            animation-delay: 4s;
+        }
+
+        /* Floating Animals */
+        .floating-animals {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .animal {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.7;
+            animation: floatAnimal 8s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+
+        .animal-1 {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+            color: var(--sage);
+        }
+
+        .animal-2 {
+            top: 60%;
+            left: 85%;
+            animation-delay: 1s;
+            color: var(--light-brown);
+        }
+
+        .animal-3 {
+            top: 80%;
+            left: 15%;
+            animation-delay: 2s;
+            color: var(--light-sage);
+        }
+
+        .animal-4 {
+            top: 30%;
+            left: 80%;
+            animation-delay: 3s;
+            color: var(--brown);
+        }
+
+        .animal-5 {
+            top: 70%;
+            left: 70%;
+            animation-delay: 4s;
+            color: var(--sage);
+        }
+
+        .animal-6 {
+            top: 40%;
+            left: 20%;
+            animation-delay: 5s;
+            color: var(--light-brown);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--sage);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            margin-bottom: 2.5rem;
+            color: var(--dark-gray);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--sage);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+        }
+
+        .visual-card {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--cream), var(--light-cream));
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .card-image i {
+            font-size: 4rem;
+            color: var(--sage);
+        }
+
+        .card-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .feature-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: var(--light-cream);
+            border-radius: var(--border-radius);
+            color: var(--sage);
+            font-weight: 500;
+        }
+
+        .feature-tag i {
+            font-size: 1.25rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-features {
+            margin: 2rem 0;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-feature i {
+            color: var(--sage);
+            font-size: 1.5rem;
+            margin-top: 0.25rem;
+        }
+
+        .about-feature h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .about-feature p {
+            margin-bottom: 0;
+            color: var(--dark-gray);
+        }
+
+        .about-visual {
+            display: flex;
+            justify-content: center;
+        }
+
+        .about-visual .visual-card {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-visual .visual-card i {
+            font-size: 6rem;
+            color: var(--sage);
+        }
+
+        /* Facilities Section */
+        .facilities-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .facility-card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .facility-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .facility-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--sage), var(--light-sage));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        .facility-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .facility-card p {
+            color: var(--dark-gray);
+            margin-bottom: 0;
+        }
+
+        /* Programs Section */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .program-card {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .program-card.featured {
+            border: 2px solid var(--sage);
+        }
+
+        .program-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--sage);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .program-header {
+            background: var(--cream);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .program-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--sage);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--white);
+            font-size: 1.25rem;
+        }
+
+        .program-header h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .program-age {
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        .program-content {
+            padding: 2rem;
+        }
+
+        .program-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .program-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .program-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-gray);
+        }
+
+        .program-features i {
+            color: var(--sage);
+        }
+
+        .program-meta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        .meta-item i {
+            color: var(--sage);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            color: var(--sage);
+            font-size: 1.5rem;
+            margin-top: 0.25rem;
+        }
+
+        .contact-item h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item p {
+            margin-bottom: 0;
+            color: var(--dark-gray);
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(106, 139, 74, 0.1);
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-sage);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: inherit;
+            background: var(--white);
+            color: var(--dark-gray);
+            resize: none;
+            min-height: 50px;
+            max-height: 150px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--sage);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(106, 139, 74, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #adb5bd;
+            font-weight: 400;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            background: linear-gradient(135deg, var(--sage), var(--dark-sage));
+            color: var(--white);
+            border: none;
+            padding: 16px 32px;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(106, 139, 74, 0.3);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .btn-loader {
+            display: none;
+        }
+
+        .btn-submit.loading .btn-text {
+            opacity: 0;
+        }
+
+        .btn-submit.loading .btn-loader {
+            display: flex;
+        }
+
+        .loader-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid var(--white);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Form Section Headers */
+        .form-section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-section-header h3 {
+            color: var(--sage);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-section-header p {
+            color: var(--gray);
+            margin-bottom: 0;
+        }
+
+        /* CAPTCHA Section */
+        .captcha-section {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+            border: 2px solid var(--light-cream);
+        }
+
+        .captcha-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .captcha-header h4 {
+            color: var(--sage);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .captcha-header p {
+            color: var(--gray);
+            margin-bottom: 0;
+            font-size: 0.875rem;
+        }
+
+        .captcha-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .captcha-display {
+            background: linear-gradient(45deg, var(--light-cream), var(--cream));
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 8px;
+            color: var(--sage);
+            border: 2px dashed var(--sage);
+            user-select: none;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .captcha-input {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .captcha-input input {
+            flex: 1;
+            padding: 14px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .captcha-input input:focus {
+            border-color: var(--sage);
+            box-shadow: 0 0 0 3px rgba(106, 139, 74, 0.1);
+        }
+
+        .captcha-input button {
+            background: var(--sage);
+            color: var(--white);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .captcha-input button:hover {
+            background: var(--dark-sage);
+            transform: rotate(180deg);
+        }
+
+        /* Select Styling */
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236A8B4A' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 12px;
+            padding-right: 40px;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--dark-sage), var(--sage));
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .footer-section p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--white);
+            color: var(--sage);
+            transform: translateY(-2px);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section ul a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section ul a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            position: relative;
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 2rem 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .modal-header h3 {
+            margin-bottom: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            color: var(--gray);
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--sage);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        /* Kids Gallery Section */
+        .kids-gallery {
+            background: var(--cream);
+            padding: 5rem 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            height: 250px;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--light-sage), var(--sage));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3rem;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(106, 139, 74, 0.9);
+            color: var(--white);
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Interactive Kids Section */
+        .interactive-kids {
+            padding: 5rem 0;
+            background: var(--light-cream);
+        }
+
+        .interactive-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .kid-character {
+            width: 150px;
+            height: 150px;
+            background: var(--sage);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--white);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .kid-character:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .kid-character::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--sage);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .interactive-message {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .interactive-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes floatAnimal {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-20px) translateX(10px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(-10px) translateX(-5px) rotate(-3deg);
+            }
+            75% {
+                transform: translateY(-15px) translateX(5px) rotate(2deg);
+            }
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes successBounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            40% {
+                transform: translateY(-10px) scale(1.1);
+            }
+            60% {
+                transform: translateY(-5px) scale(1.05);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content {
+                gap: 3rem;
+            }
+            
+            .contact-content {
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            section {
+                padding: 3rem 0;
+            }
+            
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+            
+            .hero-actions {
+                justify-content: center;
+            }
+            
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: var(--shadow);
+                transition: var(--transition);
+                gap: 1.5rem;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .mobile-toggle {
+                display: flex;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .program-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .animal {
+                font-size: 1.5rem;
+            }
+            
+            .captcha-input {
+                flex-direction: column;
+            }
+            
+            .captcha-input button {
+                width: 100%;
+                height: 50px;
+            }
+            
+            .modal-body {
+                padding: 1.5rem;
+            }
+            
+            .contact-form {
+                padding: 2rem;
+            }
+            
+            .captcha-display {
+                font-size: 1.5rem;
+                letter-spacing: 4px;
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-large {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .features-grid,
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                margin: 10px;
+            }
+            
+            .modal-body {
+                padding: 1rem;
+            }
+            
+            .contact-form {
+                padding: 1.5rem;
+            }
+            
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 12px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader">
+            <div class="loader-logo">
+                <div class="logo-spinner">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <h2>Seed Montessori</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal success-modal" id="successModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Registration Successful!</h3>
+            <p>Thank you for your interest in Seed Montessori. We'll contact you within 24 hours.</p>
+            <button class="btn btn-primary" id="successClose">Continue</button>
+        </div>
+    </div>
+
+    <!-- Enrollment Modal -->
+    <div class="modal" id="enrollmentModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Begin Your Child's Journey</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-section-header">
+                    <h3>Child Registration</h3>
+                    <p>Please provide your information to begin the enrollment process</p>
+                </div>
+                
+                <form id="enrollmentForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="parentName">Parent's Full Name</label>
+                            <input type="text" id="parentName" name="parentName" placeholder="Enter full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="Enter email address" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Enter phone number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="childName">Child's Name</label>
+                            <input type="text" id="childName" name="childName" placeholder="Enter child's name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="childAge">Child's Age</label>
+                            <input type="number" id="childAge" name="childAge" min="2" max="6" placeholder="Enter age" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="program">Program Interest</label>
+                            <select id="program" name="program" required>
+                                <option value="" disabled selected>Select program</option>
+                                <option value="toddler">Toddler Program (2-3 years)</option>
+                                <option value="primary">Primary Program (3-6 years)</option>
+                                <option value="extended">Extended Care</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Additional Information</label>
+                        <textarea id="message" name="message" rows="3" placeholder="Tell us about your child's interests, needs, or any special requirements..."></textarea>
+                    </div>
+                    
+                    <div class="captcha-section">
+                        <div class="captcha-header">
+                            <h4>Security Check</h4>
+                            <p>Please verify you're human by entering the code below</p>
+                        </div>
+                        <div class="captcha-container">
+                            <div class="captcha-display" id="captchaDisplay"></div>
+                            <div class="captcha-input">
+                                <input type="text" id="captchaInput" placeholder="Enter the code above" required>
+                                <button type="button" id="refreshCaptcha" title="Refresh CAPTCHA">
+                                    <i class="fas fa-redo"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">
+                        <span class="btn-text">Submit Registration</span>
+                        <div class="btn-loader">
+                            <div class="loader-spinner"></div>
+                        </div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <i class="fas fa-seedling" aria-hidden="true"></i>
+                        <span>Seed Montessori</span>
+                    </div>
+                </div>
+                
+                <div class="nav-menu" id="navMenu">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#about" class="nav-link">About Us</a>
+                    <a href="#programs" class="nav-link">Programs</a>
+                    <a href="#facilities" class="nav-link">Facilities</a>
+                    <a href="#gallery" class="nav-link">Gallery</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+                
+                <div class="nav-actions">
+                    <button class="btn btn-primary" id="enrollBtn">
+                        <span>Enroll Now</span>
+                    </button>
+                </div>
+                
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="floating-elements">
+                <div class="floating-item"></div>
+                <div class="floating-item"></div>
+                <div class="floating-item"></div>
+            </div>
+            
+            <div class="floating-animals">
+                <div class="animal animal-1"><i class="fas fa-bug"></i></div>
+                <div class="animal animal-2"><i class="fas fa-frog"></i></div>
+                <div class="animal animal-3"><i class="fas fa-dove"></i></div>
+                <div class="animal animal-4"><i class="fas fa-leaf"></i></div>
+                <div class="animal animal-5"><i class="fas fa-feather"></i></div>
+                <div class="animal animal-6"><i class="fas fa-butterfly"></i></div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="badge">
+                        <span>Excellence in Early Education</span>
+                    </div>
+                    <h1 class="hero-title">
+                        Nurturing Young<br>
+                        <span class="text-accent">Minds to Blossom</span>
+                    </h1>
+                    <p class="hero-description">
+                        At Seed Montessori, we create an environment where children discover their potential through exploration, creativity, and individualized learning in our state-of-the-art facilities.
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary btn-large" id="heroEnrollBtn">
+                            <span>Begin Journey</span>
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                        </button>
+                        <button class="btn btn-secondary btn-large" id="learnMoreBtn">
+                            <span>Learn More</span>
+                            <i class="fas fa-play" aria-hidden="true"></i>
+                        </button>
+                    </div>
+            
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number" data-count="150">0</div>
+                            <div class="stat-label">Happy Children</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number" data-count="12">0</div>
+                            <div class="stat-label">Certified Teachers</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number" data-count="98">0</div>
+                            <div class="stat-label">Parent Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="visual-card">
+                        <div class="card-image">
+                            <i class="fas fa-child" aria-hidden="true"></i>
+                        </div>
+                        <div class="card-features">
+                            <div class="feature-tag">
+                                <i class="fas fa-thermometer-half" aria-hidden="true"></i>
+                                <span>Centrally Heated</span>
+                            </div>
+                            <div class="feature-tag">
+                                <i class="fas fa-snowflake" aria-hidden="true"></i>
+                                <span>Air Conditioned</span>
+                            </div>
+                            <div class="feature-tag">
+                                <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                                <span>Secure Environment</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Seed Montessori</h2>
+                <p class="section-subtitle">Creating a nurturing environment where children thrive</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Our Philosophy</h3>
+                    <p>At Seed Montessori, we believe in nurturing the whole child - intellectually, emotionally, socially, and physically. Our approach is rooted in the Montessori method, which respects each child's individual development pace and learning style.</p>
+                    
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i class="fas fa-child" aria-hidden="true"></i>
+                            <div>
+                                <h4>Child-Centered Learning</h4>
+                                <p>Our curriculum adapts to each child's unique interests and abilities</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-hands" aria-hidden="true"></i>
+                            <div>
+                                <h4>Hands-On Experience</h4>
+                                <p>Learning through practical, engaging activities and materials</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-heart" aria-hidden="true"></i>
+                            <div>
+                                <h4>Nurturing Environment</h4>
+                                <p>Safe, warm, and supportive atmosphere for optimal growth</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-visual">
+                    <div class="visual-card">
+                        <i class="fas fa-seedling" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facilities Section -->
+    <section id="facilities" class="facilities">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Premium Facilities</h2>
+                <p class="section-subtitle">Designed for comfort, safety, and optimal learning</p>
+            </div>
+            
+            <div class="facilities-content">
+                <div class="facility-card">
+                    <div class="facility-icon">
+                        <i class="fas fa-thermometer-half" aria-hidden="true"></i>
+                    </div>
+                    <h3>Centrally Heated Classrooms</h3>
+                    <p>Our classrooms maintain perfect temperature year-round, ensuring a comfortable learning environment even during the coldest months.</p>
+                </div>
+                
+                <div class="facility-card">
+                    <div class="facility-icon">
+                        <i class="fas fa-snowflake" aria-hidden="true"></i>
+                    </div>
+                    <h3>Air Conditioned Spaces</h3>
+                    <p>Stay cool and focused during warmer seasons with our modern air conditioning systems in all learning areas.</p>
+                </div>
+                
+                <div class="facility-card">
+                    <div class="facility-icon">
+                        <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                    </div>
+                    <h3>Secure Environment</h3>
+                    <p>Advanced security systems and controlled access ensure your child's safety at all times.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" class="programs">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Educational Programs</h2>
+                <p class="section-subtitle">Tailored learning experiences for every stage of development</p>
+            </div>
+            
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-header">
+                        <div class="program-icon">
+                            <i class="fas fa-baby" aria-hidden="true"></i>
+                        </div>
+                        <h3>Toddler Program</h3>
+                        <p class="program-age">2-3 years</p>
+                    </div>
+                    <div class="program-content">
+                        <p>Our toddler program focuses on developing independence, language skills, and social interaction in a carefully prepared environment.</p>
+                        <ul class="program-features">
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Practical life activities</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Sensorial development</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Early language skills</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Social interaction</li>
+                        </ul>
+                        <div class="program-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-clock" aria-hidden="true"></i>
+                                <span>8:00 AM - 12:00 PM</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-users" aria-hidden="true"></i>
+                                <span>8:1 Student-Teacher Ratio</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="program-card featured">
+                    <div class="program-badge">Most Popular</div>
+                    <div class="program-header">
+                        <div class="program-icon">
+                            <i class="fas fa-child" aria-hidden="true"></i>
+                        </div>
+                        <h3>Primary Program</h3>
+                        <p class="program-age">3-6 years</p>
+                    </div>
+                    <div class="program-content">
+                        <p>Comprehensive curriculum covering all areas of development in our specially prepared Montessori environment.</p>
+                        <ul class="program-features">
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Mathematics & Numbers</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Language arts & Reading</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Cultural studies</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Science exploration</li>
+                        </ul>
+                        <div class="program-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-clock" aria-hidden="true"></i>
+                                <span>8:00 AM - 3:00 PM</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-users" aria-hidden="true"></i>
+                                <span>10:1 Student-Teacher Ratio</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-header">
+                        <div class="program-icon">
+                            <i class="fas fa-sun" aria-hidden="true"></i>
+                        </div>
+                        <h3>Extended Care</h3>
+                        <p class="program-age">All Ages</p>
+                    </div>
+                    <div class="program-content">
+                        <p>Before and after school care for working parents in a safe, engaging, and nurturing environment.</p>
+                        <ul class="program-features">
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Flexible hours</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Homework assistance</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Enrichment activities</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Outdoor play</li>
+                        </ul>
+                        <div class="program-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-clock" aria-hidden="true"></i>
+                                <span>7:00 AM - 6:00 PM</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-users" aria-hidden="true"></i>
+                                <span>12:1 Student-Teacher Ratio</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kids Gallery Section -->
+    <section id="gallery" class="kids-gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Happy Learners</h2>
+                <p class="section-subtitle">See our students engaged in learning and play</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <div class="gallery-caption">
+                        <h4>Creative Arts</h4>
+                        <p>Expressing imagination through art</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="gallery-caption">
+                        <h4>Story Time</h4>
+                        <p>Developing language and listening skills</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="gallery-caption">
+                        <h4>Nature Exploration</h4>
+                        <p>Learning about the world around us</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <div class="gallery-caption">
+                        <h4>Building Blocks</h4>
+                        <p>Developing spatial awareness and creativity</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="gallery-caption">
+                        <h4>Music & Movement</h4>
+                        <p>Exploring rhythm and coordination</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <div class="gallery-caption">
+                        <h4>Healthy Snacks</h4>
+                        <p>Learning about nutrition and healthy habits</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Kids Section -->
+    <section class="interactive-kids">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Interactive Learning</h2>
+                <p class="section-subtitle">Tap on our friendly character to see what we're learning today!</p>
+            </div>
+            
+            <div class="interactive-container">
+                <div class="kid-character" id="kidCharacter">
+                    <i class="fas fa-child"></i>
+                </div>
+                
+                <div class="interactive-message" id="interactiveMessage">
+                    <h3>Click on our friend to learn something new!</h3>
+                </div>
+                
+                <div class="interactive-buttons">
+                    <button class="btn btn-primary" id="colorButton">
+                        <i class="fas fa-palette"></i>
+                        <span>Learn Colors</span>
+                    </button>
+                    <button class="btn btn-secondary" id="numberButton">
+                        <i class="fas fa-sort-numeric-up"></i>
+                        <span>Learn Numbers</span>
+                    </button>
+                    <button class="btn btn-primary" id="shapeButton">
+                        <i class="fas fa-shapes"></i>
+                        <span>Learn Shapes</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Schedule an Appointment</h2>
+                <p class="section-subtitle">Visit us by appointment to discuss your child's educational journey</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                        <div>
+                            <h4>Visit Us</h4>
+                            <p>Sco 36,37 Aero Arcade G-BLOCK, Aerocity, near International Airport, Punjab 140306</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone" aria-hidden="true"></i>
+                        <div>
+                            <h4>Call Us</h4>
+                            <p>+91 9592080029<br>+91 9592080073</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <div>
+                            <h4>Email Us</h4>
+                            <p>info@theseedmontessori.in</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock" aria-hidden="true"></i>
+                        <div>
+                            <h4>Operating Hours</h4>
+                            <p>Monday - Friday: 7:00 AM - 6:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" name="contactName" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="contactEmail" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="contactPhone" placeholder="Your Phone">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="contactMessage" placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            <span>Schedule Appointment</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-seedling" aria-hidden="true"></i>
+                        <span>The Seed Montessori</span>
+                    </div>
+                    <p>Nurturing young minds through the Montessori method in our centrally heated and air-conditioned, safe learning environment.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#facilities">Facilities</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="#programs">Toddler Program</a></li>
+                        <li><a href="#programs">Primary Program</a></li>
+                        <li><a href="#programs">Extended Care</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i>Sco 36,37 Aero Arcade G-BLOCK, Aerocity, near International Airport, Punjab 140306</p>
+                        <p><i class="fas fa-phone" aria-hidden="true"></i> +91 9592080029 , +91 9592080073</p>
+                        <p><i class="fas fa-envelope" aria-hidden="true"></i> info@theseedmontessori.in</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 The Seed Montessori School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const loadingScreen = document.getElementById('loadingScreen');
+        const header = document.querySelector('.header');
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const enrollBtn = document.getElementById('enrollBtn');
+        const heroEnrollBtn = document.getElementById('heroEnrollBtn');
+        const learnMoreBtn = document.getElementById('learnMoreBtn');
+        const enrollmentModal = document.getElementById('enrollmentModal');
+        const successModal = document.getElementById('successModal');
+        const modalClose = document.getElementById('modalClose');
+        const successClose = document.getElementById('successClose');
+        const enrollmentForm = document.getElementById('enrollmentForm');
+        const contactForm = document.getElementById('contactForm');
+        const captchaDisplay = document.getElementById('captchaDisplay');
+        const captchaInput = document.getElementById('captchaInput');
+        const refreshCaptcha = document.getElementById('refreshCaptcha');
+        const statNumbers = document.querySelectorAll('.stat-number');
+        const kidCharacter = document.getElementById('kidCharacter');
+        const interactiveMessage = document.getElementById('interactiveMessage');
+        const colorButton = document.getElementById('colorButton');
+        const numberButton = document.getElementById('numberButton');
+        const shapeButton = document.getElementById('shapeButton');
+
+        // Global Variables
+        let currentCaptcha = '';
+        let isSubmitting = false;
+
+        // Interactive learning content
+        const learningContent = {
+            colors: [
+                { name: "Red", icon: "🔴", example: "Like an apple!" },
+                { name: "Blue", icon: "🔵", example: "Like the sky!" },
+                { name: "Yellow", icon: "🟡", example: "Like the sun!" },
+                { name: "Green", icon: "🟢", example: "Like grass!" }
+            ],
+            numbers: [
+                { number: "1", icon: "1️⃣", example: "One little finger" },
+                { number: "2", icon: "2️⃣", example: "Two bright eyes" },
+                { number: "3", icon: "3️⃣", example: "Three little kittens" },
+                { number: "4", icon: "4️⃣", example: "Four seasons" }
+            ],
+            shapes: [
+                { name: "Circle", icon: "⭕", example: "Like a ball!" },
+                { name: "Square", icon: "⬜", example: "Like a window!" },
+                { name: "Triangle", icon: "🔺", example: "Like a slice of pizza!" },
+                { name: "Star", icon: "⭐", example: "Like in the sky!" }
+            ]
+        };
+
+        // Initialize App
+        function initApp() {
+            console.log("Initializing app...");
+            initLoadingScreen();
+            initNavigation();
+            initModal();
+            initForms();
+            initAnimations();
+            initCounters();
+            initInteractiveElements();
+        }
+
+        // Loading Screen
+        function initLoadingScreen() {
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    loadingScreen.classList.add('fade-out');
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                    }, 500);
+                }, 1500);
+            });
+        }
+
+        // Navigation
+        function initNavigation() {
+            // Mobile menu toggle
+            mobileToggle.addEventListener('click', () => {
+                mobileToggle.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on links
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    
+                    // Update active link
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                });
+            });
+
+            // Header scroll effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerHeight = header.offsetHeight;
+                        const targetPosition = targetElement.offsetTop - headerHeight - 20;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Learn more button
+            learnMoreBtn.addEventListener('click', () => {
+                document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+
+        // Modal System
+        function initModal() {
+            // Open modals
+            enrollBtn.addEventListener('click', () => openModal(enrollmentModal));
+            heroEnrollBtn.addEventListener('click', () => openModal(enrollmentModal));
+
+            // Close modals
+            modalClose.addEventListener('click', () => closeModal(enrollmentModal));
+            successClose.addEventListener('click', () => closeModal(successModal));
+            
+            // Close modal when clicking outside
+            [enrollmentModal, successModal].forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        closeModal(modal);
+                    }
+                });
+            });
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (enrollmentModal.classList.contains('active')) closeModal(enrollmentModal);
+                    if (successModal.classList.contains('active')) closeModal(successModal);
+                }
+            });
+        }
+
+        function openModal(modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            if (modal === enrollmentModal) {
+                generateCaptcha();
+            }
+        }
+
+        function closeModal(modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            if (modal === enrollmentModal) {
+                resetForm(enrollmentForm);
+            }
+        }
+
+        function resetForm(form) {
+            form.reset();
+            if (form === enrollmentForm) {
+                captchaInput.value = '';
+            }
+            isSubmitting = false;
+            const submitBtn = form.querySelector('.btn-submit');
+            if (submitBtn) {
+                submitBtn.classList.remove('loading');
+            }
+        }
+
+        function showSuccessModal() {
+            closeModal(enrollmentModal);
+            openModal(successModal);
+        }
+
+        // CAPTCHA System
+        function generateCaptcha() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+            let captcha = '';
+            
+            for (let i = 0; i < 6; i++) {
+                captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            
+            currentCaptcha = captcha;
+            captchaDisplay.textContent = captcha;
+        }
+
+        refreshCaptcha.addEventListener('click', generateCaptcha);
+
+        // Form Handling
+        function initForms() {
+            // Enrollment form
+            enrollmentForm.addEventListener('submit', handleEnrollmentSubmit);
+            
+            // Contact form
+            contactForm.addEventListener('submit', handleContactSubmit);
+        }
+
+        async function handleEnrollmentSubmit(e) {
+            e.preventDefault();
+            console.log("Enrollment form submitted");
+            
+            if (isSubmitting) return;
+            
+            if (!validateForm(enrollmentForm)) {
+                showNotification('Please fill in all required fields correctly.', 'error');
+                return;
+            }
+            
+            // Validate CAPTCHA
+            if (captchaInput.value !== currentCaptcha) {
+                showNotification('CAPTCHA verification failed. Please try again.', 'error');
+                generateCaptcha();
+                captchaInput.value = '';
+                return;
+            }
+            
+            isSubmitting = true;
+            const submitBtn = enrollmentForm.querySelector('.btn-submit');
+            submitBtn.classList.add('loading');
+            
+            try {
+                const formData = {
+                    parentName: document.getElementById('parentName').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    phone: document.getElementById('phone').value.trim(),
+                    childName: document.getElementById('childName').value.trim(),
+                    childAge: document.getElementById('childAge').value,
+                    program: document.getElementById('program').value,
+                    message: document.getElementById('message').value.trim(),
+                    timestamp: new Date().toISOString(),
+                    status: 'new',
+                    type: 'enrollment'
+                };
+                
+                console.log('Form data:', formData);
+                
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                console.log('Successfully submitted enrollment form');
+                
+                showSuccessModal();
+                resetForm(enrollmentForm);
+                
+            } catch (error) {
+                console.error('Error submitting enrollment:', error);
+                showNotification('There was an error submitting your registration. Please try again.', 'error');
+                isSubmitting = false;
+                submitBtn.classList.remove('loading');
+            }
+        }
+
+        async function handleContactSubmit(e) {
+            e.preventDefault();
+            console.log("Contact form submitted");
+            
+            if (!validateForm(contactForm)) {
+                showNotification('Please fill in all required fields correctly.', 'error');
+                return;
+            }
+            
+            const submitBtn = contactForm.querySelector('.btn-submit');
+            submitBtn.classList.add('loading');
+            
+            try {
+                const formData = {
+                    name: contactForm.querySelector('input[name="contactName"]').value.trim(),
+                    email: contactForm.querySelector('input[name="contactEmail"]').value.trim(),
+                    phone: contactForm.querySelector('input[name="contactPhone"]').value.trim(),
+                    message: contactForm.querySelector('textarea[name="contactMessage"]').value.trim(),
+                    timestamp: new Date().toISOString(),
+                    type: 'contact'
+                };
+                
+                console.log('Contact form data:', formData);
+                
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                console.log('Successfully submitted contact form');
+                
+                showNotification('Message sent successfully! We will get back to you soon.', 'success');
+                contactForm.reset();
+                
+            } catch (error) {
+                console.error('Error submitting contact:', error);
+                showNotification('There was an error sending your message. Please try again.', 'error');
+            } finally {
+                submitBtn.classList.remove('loading');
+            }
+        }
+
+        function validateForm(form) {
+            const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    highlightError(input);
+                } else {
+                    removeError(input);
+                }
+            });
+            
+            // Email validation
+            const emailInput = form.querySelector('input[type="email"]');
+            if (emailInput && emailInput.value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailInput.value)) {
+                    isValid = false;
+                    highlightError(emailInput);
+                }
+            }
+            
+            return isValid;
+        }
+
+        function highlightError(element) {
+            element.style.borderColor = '#e74c3c';
+        }
+
+        function removeError(element) {
+            element.style.borderColor = '#e9ecef';
+        }
+
+        // Interactive Elements
+        function initInteractiveElements() {
+            // Kid character interaction
+            kidCharacter.addEventListener('click', showRandomLearning);
+            
+            // Learning buttons
+            colorButton.addEventListener('click', () => showLearningContent('colors'));
+            numberButton.addEventListener('click', () => showLearningContent('numbers'));
+            shapeButton.addEventListener('click', () => showLearningContent('shapes'));
+        }
+
+        function showRandomLearning() {
+            const categories = ['colors', 'numbers', 'shapes'];
+            const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+            showLearningContent(randomCategory);
+        }
+
+        function showLearningContent(category) {
+            const content = learningContent[category];
+            const randomItem = content[Math.floor(Math.random() * content.length)];
+            
+            let message = '';
+            let title = '';
+            
+            switch(category) {
+                case 'colors':
+                    title = 'Let\'s Learn Colors!';
+                    message = `${randomItem.icon} <strong>${randomItem.name}</strong> - ${randomItem.example}`;
+                    break;
+                case 'numbers':
+                    title = 'Let\'s Count!';
+                    message = `${randomItem.icon} Number <strong>${randomItem.number}</strong> - ${randomItem.example}`;
+                    break;
+                case 'shapes':
+                    title = 'Let\'s Learn Shapes!';
+                    message = `${randomItem.icon} <strong>${randomItem.name}</strong> - ${randomItem.example}`;
+                    break;
+            }
+            
+            interactiveMessage.innerHTML = `
+                <h3>${title}</h3>
+                <p style="font-size: 1.5rem; margin: 1rem 0;">${message}</p>
+                <p>Click again to learn more!</p>
+            `;
+            
+            // Add animation to kid character
+            kidCharacter.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                kidCharacter.style.transform = 'scale(1)';
+            }, 300);
+        }
+
+        // Animations
+        function initAnimations() {
+            // Intersection Observer for fade-in animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            document.querySelectorAll('.facility-card, .program-card, .contact-item, .about-feature, .gallery-item').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+
+            // Add CSS for animations
+            const style = document.createElement('style');
+            style.textContent = `
+                .animate-in {
+                    opacity: 1 !important;
+                    transform: translateY(0) !important;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Counter Animation
+        function initCounters() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        statNumbers.forEach(stat => {
+                            animateCounter(stat);
+                        });
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(document.querySelector('.hero-stats'));
+        }
+
+        function animateCounter(element) {
+            const target = parseInt(element.getAttribute('data-count'));
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+            
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, 16);
+        }
+
+        // Notification System
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.setAttribute('role', 'alert');
+            notification.setAttribute('aria-live', 'polite');
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check' : 'exclamation'}" aria-hidden="true"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            // Add styles if not already added
+            if (!document.querySelector('#notification-styles')) {
+                const styles = document.createElement('style');
+                styles.id = 'notification-styles';
+                styles.textContent = `
+                    .notification {
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        background: white;
+                        padding: 1rem 1.5rem;
+                        border-radius: 8px;
+                        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+                        transform: translateX(400px);
+                        transition: transform 0.3s ease;
+                        z-index: 10000;
+                        border-left: 4px solid #6A8B4A;
+                        max-width: 400px;
+                    }
+                    
+                    .notification.error {
+                        border-left-color: #e74c3c;
+                    }
+                    
+                    .notification.show {
+                        transform: translateX(0);
+                    }
+                    
+                    .notification-content {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.75rem;
+                    }
+                    
+                    .notification i {
+                        color: #6A8B4A;
+                    }
+                    
+                    .notification.error i {
+                        color: #e74c3c;
+                    }
+                `;
+                document.head.appendChild(styles);
+            }
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            // Remove after delay
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 4000);
+        }
+
+        // Auto-open modal after delay
+        setTimeout(() => {
+            if (!enrollmentModal.classList.contains('active') && !successModal.classList.contains('active')) {
+                openModal(enrollmentModal);
+            }
+        }, 5000);
+
+        // Initialize the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

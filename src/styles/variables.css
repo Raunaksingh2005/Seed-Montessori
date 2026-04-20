@@ -1,0 +1,19 @@
+:root {
+    --cream: #FEFAE6;
+    --sage: #6A8B4A;
+    --brown: #794D2A;
+    --light-sage: #8BA870;
+    --light-brown: #9C6D4A;
+    --dark-sage: #5A7740;
+    --white: #FFFFFF;
+    --light-cream: #FFFDF5;
+    --gray: #6C757D;
+    --light-gray: #F8F9FA;
+    --dark-gray: #495057;
+    
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+    --transition: all 0.3s ease;
+    --border-radius: 8px;
+    --border-radius-lg: 12px;
+}
