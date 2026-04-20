@@ -89,12 +89,3 @@ src/
 
 ---
 
-## Running Locally
-
-```bash
-git clone https://github.com/Raunaksingh2005/Seed-Montessori.git
-cd Seed-Montessori
-npm install
-cp .env.example .env   # add your Firebase credentials
-npm start
-```
