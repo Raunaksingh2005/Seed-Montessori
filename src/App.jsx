@@ -4,7 +4,6 @@ import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
 import Facilities from './components/Facilities/Facilities';
-import Programs from './components/Programs/Programs';
 import Gallery from './components/Gallery/Gallery';
 import Interactive from './components/Interactive/Interactive';
 import Contact from './components/Contact/Contact';
@@ -21,7 +20,6 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-      // Auto-open enrollment modal after 3 seconds
       setTimeout(() => {
         setEnrollmentModalOpen(true);
       }, 3000);
@@ -42,17 +40,16 @@ function App() {
       <Hero onEnrollClick={() => setEnrollmentModalOpen(true)} />
       <About />
       <Facilities />
-      <Programs />
       <Gallery />
       <Interactive />
       <Contact />
       <Footer />
-      <EnrollmentModal 
+      <EnrollmentModal
         isOpen={enrollmentModalOpen}
         onClose={() => setEnrollmentModalOpen(false)}
         onSuccess={handleEnrollmentSuccess}
       />
-      <SuccessModal 
+      <SuccessModal
         isOpen={successModalOpen}
         onClose={() => setSuccessModalOpen(false)}
       />

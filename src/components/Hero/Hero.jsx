@@ -1,107 +1,98 @@
 import React from 'react';
-import Container from '../common/Container/Container';
-import Button from '../common/Button/Button';
-import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
-import { useCounters } from '../../hooks/useCounters';
 import styles from './Hero.module.css';
 
 const Hero = ({ onEnrollClick }) => {
-  const [statsRef, statsVisible] = useIntersectionObserver({ threshold: 0.5 });
-  const childrenCount = useCounters(150, statsVisible);
-  const teachersCount = useCounters(12, statsVisible);
-  const satisfactionCount = useCounters(98, statsVisible);
-
-  const handleLearnMore = () => {
+  const scrollToAbout = () =>
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   return (
     <section id="home" className={styles.hero}>
-      {/* Full-bleed background image */}
-      <div className={styles.heroBg}></div>
-      <div className={styles.heroOverlay}></div>
-
-      {/* Floating emoji animals */}
-      <div className={styles.floatingAnimals}>
-        <span className={`${styles.animal} ${styles.a1}`}>🦋</span>
-        <span className={`${styles.animal} ${styles.a2}`}>🐸</span>
-        <span className={`${styles.animal} ${styles.a3}`}>🌸</span>
-        <span className={`${styles.animal} ${styles.a4}`}>🌿</span>
-        <span className={`${styles.animal} ${styles.a5}`}>⭐</span>
-        <span className={`${styles.animal} ${styles.a6}`}>🐝</span>
+      {/* Background */}
+      <div className={styles.bg}>
+        <img
+          src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=1600&q=85&auto=format&fit=crop"
+          alt="Children learning in a bright classroom"
+          className={styles.bgImg}
+        />
+        <div className={styles.bgOverlay} />
       </div>
 
-      <Container>
-        <div className={styles.heroContent}>
-          {/* Left: text */}
-          <div className={styles.heroText}>
-            <div className={styles.badge}>🌱 Excellence in Early Education</div>
-            <h1 className={styles.heroTitle}>
-              Nurturing Young<br />
-              <span className={styles.accent}>Minds to Blossom</span>
-            </h1>
-            <p className={styles.heroDescription}>
-              At Seed Montessori, we create an environment where children discover their potential through exploration, creativity, and individualized learning in our state-of-the-art facilities.
-            </p>
-            <div className={styles.heroActions}>
-              <Button variant="primary" size="large" onClick={onEnrollClick}>
-                <span>Begin Journey</span>
-                <i className="fas fa-arrow-right"></i>
-              </Button>
-              <Button variant="secondary" size="large" onClick={handleLearnMore}>
-                <span>Learn More</span>
-                <i className="fas fa-play"></i>
-              </Button>
+      {/* Floating decorative dots */}
+      <div className={styles.dots} aria-hidden="true">
+        <span className={`${styles.dot} ${styles.dot1}`} />
+        <span className={`${styles.dot} ${styles.dot2}`} />
+        <span className={`${styles.dot} ${styles.dot3}`} />
+      </div>
+
+      <div className={styles.container}>
+        <div className={styles.content}>
+          {/* Left column */}
+          <div className={styles.left}>
+            <div className={styles.pill}>
+              <span className={styles.pillDot} />
+              Excellence in Early Education
             </div>
 
-            <div className={styles.heroStats} ref={statsRef}>
-              <div className={styles.stat}>
-                <div className={styles.statNumber}>{childrenCount}+</div>
-                <div className={styles.statLabel}>Happy Children</div>
-              </div>
-              <div className={styles.stat}>
-                <div className={styles.statNumber}>{teachersCount}+</div>
-                <div className={styles.statLabel}>Certified Teachers</div>
-              </div>
-              <div className={styles.stat}>
-                <div className={styles.statNumber}>{satisfactionCount}%</div>
-                <div className={styles.statLabel}>Parent Satisfaction</div>
-              </div>
+            <h1 className={styles.title}>
+              Where Every Child<br />
+              <em className={styles.titleEm}>Discovers & Grows</em>
+            </h1>
+
+            <p className={styles.desc}>
+              At Seed Montessori, we nurture curious minds through the proven Montessori method — blending hands-on learning, creative exploration, and a warm, secure environment.
+            </p>
+
+            <div className={styles.actions}>
+              <button className={styles.btnPrimary} onClick={onEnrollClick}>
+                Enroll Your Child
+                <i className="fas fa-arrow-right"></i>
+              </button>
+              <button className={styles.btnGhost} onClick={scrollToAbout}>
+                <span className={styles.playIcon}><i className="fas fa-play"></i></span>
+                Discover More
+              </button>
             </div>
           </div>
 
-          {/* Right: image collage */}
-          <div className={styles.heroVisual}>
-            <div className={styles.imageCollage}>
-              <div className={styles.imgMain}>
+          {/* Right column — image mosaic */}
+          <div className={styles.right}>
+            <div className={styles.mosaic}>
+              <div className={styles.mosaicMain}>
                 <img
-                  src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=500&q=80"
-                  alt="Happy children learning"
+                  src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&q=85&auto=format&fit=crop"
+                  alt="Child engaged in learning"
                 />
               </div>
-              <div className={styles.imgSmallTop}>
+              <div className={styles.mosaicTop}>
                 <img
-                  src="https://images.unsplash.com/photo-1560969184-10fe8719e047?w=300&q=80"
+                  src="https://images.unsplash.com/photo-1560969184-10fe8719e047?w=400&q=85&auto=format&fit=crop"
                   alt="Kids painting"
                 />
               </div>
-              <div className={styles.imgSmallBottom}>
+              <div className={styles.mosaicBottom}>
                 <img
-                  src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=300&q=80"
+                  src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=400&q=85&auto=format&fit=crop"
                   alt="Classroom activity"
                 />
               </div>
-              <div className={styles.floatingBadge}>
-                <span>🏆</span>
+
+              {/* Floating badge only */}
+              <div className={styles.badge}>
+                <div className={styles.badgeIcon}>🏆</div>
                 <div>
                   <strong>Award Winning</strong>
-                  <small>Montessori School</small>
+                  <span>Montessori School</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </Container>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className={styles.scrollIndicator} onClick={scrollToAbout}>
+        <span />
+      </div>
     </section>
   );
 };
