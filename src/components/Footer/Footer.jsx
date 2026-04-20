@@ -57,14 +57,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Programs — placeholder, will be updated */}
-          <div className={styles.col}>
-            <h4 className={styles.colTitle}>Our Programs</h4>
-            <ul className={styles.links}>
-              <li><span className={styles.comingSoon}><i className="fas fa-clock"></i> Coming Soon</span></li>
-            </ul>
-          </div>
-
           {/* Contact */}
           <div className={styles.col}>
             <h4 className={styles.colTitle}>Contact Us</h4>

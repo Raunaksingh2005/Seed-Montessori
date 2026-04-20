@@ -5,7 +5,6 @@ import Hero from './components/Hero/Hero';
 import About from './components/About/About';
 import Facilities from './components/Facilities/Facilities';
 import Gallery from './components/Gallery/Gallery';
-import Interactive from './components/Interactive/Interactive';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import EnrollmentModal from './components/Modals/EnrollmentModal/EnrollmentModal';
@@ -41,7 +40,6 @@ function App() {
       <About />
       <Facilities />
       <Gallery />
-      <Interactive />
       <Contact />
       <Footer />
       <EnrollmentModal
